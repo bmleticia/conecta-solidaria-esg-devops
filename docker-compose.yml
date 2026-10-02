@@ -1,0 +1,57 @@
+name: conecta-solidaria-esg
+
+x-common-environment: &common-environment
+  DB_URL: ${DB_URL}
+  DB_USERNAME: ${DB_USERNAME}
+  DB_PASSWORD: ${DB_PASSWORD}
+  API_ADMIN_USER: ${API_ADMIN_USER:-admin}
+  API_ADMIN_PASSWORD: ${API_ADMIN_PASSWORD:-admin123}
+  API_USER: ${API_USER:-usuario}
+  API_USER_PASSWORD: ${API_USER_PASSWORD:-usuario123}
+  JPA_SHOW_SQL: "false"
+  FLYWAY_ENABLED: "true"
+
+services:
+  app-staging:
+    profiles: ["staging"]
+    image: ${IMAGE_NAME:-conecta-solidaria-esg}:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: conecta-solidaria-staging
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      <<: *common-environment
+      SPRING_PROFILES_ACTIVE: staging
+    volumes:
+      - staging-logs:/app/logs
+    networks:
+      - esg-network
+
+  app-production:
+    profiles: ["production"]
+    image: ${IMAGE_NAME:-conecta-solidaria-esg}:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: conecta-solidaria-production
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+    environment:
+      <<: *common-environment
+      SPRING_PROFILES_ACTIVE: production
+    volumes:
+      - production-logs:/app/logs
+    networks:
+      - esg-network
+
+volumes:
+  staging-logs:
+  production-logs:
+
+networks:
+  esg-network:
+    driver: bridge
