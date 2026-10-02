@@ -126,30 +126,6 @@ Execucao local:
 mvn clean test
 ```
 
-## Prints do funcionamento
-
-> **Importante:** os arquivos abaixo sao marcadores. Substitua pelos prints reais obtidos no GitHub Actions e na execucao local antes de entregar. O passo a passo esta em `docs/GUIA_EVIDENCIAS.md`.
-
-### Pipeline - build e testes
-
-![Build e testes](docs/evidencias/01-pipeline-build-test.png)
-
-### Pipeline - deploy staging
-
-![Deploy staging](docs/evidencias/02-pipeline-staging.png)
-
-### Pipeline - deploy producao
-
-![Deploy producao](docs/evidencias/03-pipeline-producao.png)
-
-### Staging funcionando
-
-![Staging](docs/evidencias/04-staging-health.png)
-
-### Producao funcionando
-
-![Producao](docs/evidencias/05-producao-health.png)
-
 ## Tecnologias utilizadas
 
 - Java 17
@@ -183,17 +159,3 @@ fiap-esg-api-devops/
 └── README.md
 ```
 
-## Checklist de entrega
-
-| Item | OK |
-|---|:---:|
-| Projeto compactado em .ZIP com estrutura organizada | ☑ |
-| Dockerfile funcional | ☑ |
-| docker-compose.yml com volumes, variaveis e rede | ☑ |
-| Pipeline com build, testes, staging e producao | ☑ |
-| README.md com instrucoes | ☑ |
-| Documentacao tecnica em PDF | ☑ |
-| Evidencias reais de pipeline/deploy substituidas nos marcadores | ☐ |
-| Deploy executado em staging e producao | ☐ |
-
-Os dois ultimos itens devem ser marcados apos a execucao do workflow e captura dos prints reais.
